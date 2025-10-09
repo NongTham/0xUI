@@ -1,4 +1,32 @@
 
+--[[  UI นี้ Open src ถ้ามึงจะก็อปก็เอาไปเถอะถ้าขยันนั่งแก้ Src ที่กูเขียน ;)
+       
+MMMMMMMW0xlcloxOXWMMMMN0dc'..'cONMMMMMMM
+MMMMMNkc,',;;,,,;ldxxo;.       .;kNMMMMM
+MMMWOc,''..',,;;;,'....          .:OWMMM
+MMNx,''.     ..',;,'...            .dNMM
+MMO;'.  ..     ..,,'..        ..    .OMM
+MMx'. 'd0k'  .;:;,.....,;;'  'kXk,  .dWM
+MMk' ,OWMXc ,OOx0XOxxOX0x0K: ;KMMK: .dWM
+MWk..lNMWd..;:'.c0K000Oc..:;..lNMWd..dWM
+M0:...kMWd..c:.  .,cc;.   ;c..lNM0;..'OM
+MKl'.:0MMK:.lKd;cl;,,:oo:o0o.:0MMKl,'cKM
+MMWXXWMWNKx,,ddxK0o:;oKKkdx;,d0NWMWXXWMM
+MMMMW0dc,.. .:c'.;lllc;.'lc. ..,cd0NMMMM
+MMMWKl. ...  .;c.      .oc.      .l0WMMM
+MMMMNd'.'''.   .c;....,c,        .oXMMMM
+MMWO:..,,'..    .cdxxdc.   .   ....;kNMM
+MMNl.'d0Oc        ....  ...'..;kKk;.:KMM
+MMMNKXWMWd. .,;'.       'c:,..lNMWNKNWMM
+MMMMMMMMXc .xNWXx,    'oKWNk, ;KMMMMMMMM
+MMMMMMMMWOdkNMMMMO'  .kMMMMWOdkNMMMMMMMM
+MMMMMMMMMMMMMMMMMXl'.cKMMMMMMMMMMMMMMMMM
+
+                เข้าดิสกูมา
+
+]]
+
+
 local SomtankUI = {}
 
 local UserInputService = game:GetService("UserInputService")
