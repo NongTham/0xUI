@@ -1,4 +1,5 @@
 
+
 --[[  UI นี้ Open src ถ้ามึงจะก็อปก็เอาไปเถอะถ้าขยันนั่งแก้ Src ที่กูเขียน ;)
        
 MMMMMMMW0xlcloxOXWMMMMN0dc'..'cONMMMMMMM
@@ -25,7 +26,6 @@ MMMMMMMMMMMMMMMMMXl'.cKMMMMMMMMMMMMMMMMM
                 เข้าดิสกูมา
 
 ]]
-
 
 local SomtankUI = {}
 
@@ -210,8 +210,8 @@ local NowTheame = SomtankTheameAll.Default
 
 local function AnimateButton(button, PlaySound)
 	if not button or not button:IsA("GuiObject") then return end
-	local name = button.Name
-	if not _G.OldPosition[button.Name] then
+	local name = button.Name--ItsDragIcon
+	if not _G.OldPosition[button.Name] and not button:GetAttribute("ItsDragIcon") then
 		_G.OldPosition[button.Name] = button.Position
 	end
 	if not _G.OldSize[button.Name] then
@@ -235,6 +235,7 @@ local function AnimateButton(button, PlaySound)
 	tween1.Completed:Connect(function()
 		tween2:Play()
 		tween2.Completed:Connect(function()
+			if button:GetAttribute("ItsDragIcon") then return end
 			tween3:Play()
 			tween3.Completed:Connect(function()				
 				if _G.OldPosition[button.Name] then
@@ -268,7 +269,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 	local ScreenGui = Instance.new("ScreenGui")
 	ScreenGui.Name = "SomtankUI_"..math.random(0,99)
 	ScreenGui.ResetOnSpawn = false
-	ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	ScreenGui.Parent = game:getService("CoreGui")
 	local UIScale = Instance.new("UIScale", ScreenGui)
 	UIScale.Scale = Setting_Input and Setting_Input.Scale or 0.89
 	local BGFrame = Instance.new("ImageLabel", ScreenGui)
@@ -288,9 +289,11 @@ function SomtankUI:CreateWindow(Setting_Input)
 	DragIconButton.BackgroundTransparency = 1
 	DragIconButton.TextTransparency = 1
 	MakeDraggable(DragIconButton, DragIcon)
+	DragIcon:SetAttribute("ItsDragIcon", true)
 	DragIconButton.Activated:connect(function()
 		if _G.DragIconOldPosition and DragIcon.Position == _G.DragIconOldPosition then
 			AnimateButton(DragIcon, true)
+			BGFrame.Visible = not BGFrame.Visible
 		end
 	end)
 	AddJipaTaUI(Instance.new("UIAspectRatioConstraint"), DragIcon)
@@ -355,7 +358,10 @@ function SomtankUI:CreateWindow(Setting_Input)
 	AddJipaTaUI(Instance.new("UIStroke"), DestroyButton, NowTheame.UIStroke1, 2.7, 0.52)
 	AddJipaTaUI(Instance.new("UIStroke"), DestroyButton, NowTheame.UIStroke1, 2.7, 0.52)
 	DestroyButton.Activated:connect(function()
+		DestroyButton.Active = false
 		AnimateButton(DestroyButton, true)
+		task.wait(1)
+		ScreenGui:Destroy()
 	end)
 	local EyeButton = Instance.new("TextButton", TopFrame)
 	EyeButton.Position = UDim2.new(0.804, 0,0.046, 0)
@@ -372,6 +378,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 	AddJipaTaUI(Instance.new("UIStroke"), EyeButton, NowTheame.UIStroke1, 2.7, 0.52)
 	EyeButton.Activated:connect(function()
 		AnimateButton(EyeButton, true)
+		BGFrame.Visible = not BGFrame.Visible
 	end)
 	local TitleMainFrame = Instance.new("TextButton", TopFrame)
 	TitleMainFrame.Position = UDim2.new(0.01, 0,0, 0)
