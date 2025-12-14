@@ -1,5 +1,4 @@
 
-
 --[[  UI นี้ Open src ถ้ามึงจะก็อปก็เอาไปเถอะถ้าขยันนั่งแก้ Src ที่กูเขียน ;)
        
 MMMMMMMW0xlcloxOXWMMMMN0dc'..'cONMMMMMMM
@@ -260,7 +259,7 @@ local function AnimateButton(button, PlaySound)
 end
 
 function SomtankUI:CreateWindow(Setting_Input)
-	wait()
+	task.wait()
 	
 	if _G.NoSoundWindow then
 		_G.NoSoundWindow = false
@@ -269,7 +268,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 	local ScreenGui = Instance.new("ScreenGui")
 	ScreenGui.Name = "SomtankUI_"..math.random(0,99)
 	ScreenGui.ResetOnSpawn = false
-	ScreenGui.Parent = game:getService("CoreGui")
+	ScreenGui.Parent = game:getService("CoreGui") or game.Players.LocalPlayer.PlayerGui
 	local UIScale = Instance.new("UIScale", ScreenGui)
 	UIScale.Scale = Setting_Input and Setting_Input.Scale or 0.89
 	local BGFrame = Instance.new("ImageLabel", ScreenGui)
@@ -283,7 +282,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 	DragIcon.BackgroundTransparency = 1
 	DragIcon.Image = NowTheame.DragIconImage
 	DragIcon.Name = "DragIcon"
-	local DragIconButton = Instance.new("TextButton", DragIcon)
+	local DragIconButton, UserOpenned = Instance.new("TextButton", DragIcon), false
 	DragIconButton.Size = UDim2.new(1, 0,1, 0)
 	DragIconButton.Position = UDim2.new(0, 0,0, 0)
 	DragIconButton.BackgroundTransparency = 1
@@ -291,9 +290,14 @@ function SomtankUI:CreateWindow(Setting_Input)
 	MakeDraggable(DragIconButton, DragIcon)
 	DragIcon:SetAttribute("ItsDragIcon", true)
 	DragIconButton.Activated:connect(function()
-		if _G.DragIconOldPosition and DragIcon.Position == _G.DragIconOldPosition then
-			AnimateButton(DragIcon, true)
-			BGFrame.Visible = not BGFrame.Visible
+		if not UserOpenned then
+			UserOpenned = true
+			if _G.DragIconOldPosition and DragIcon.Position == _G.DragIconOldPosition then
+				AnimateButton(DragIcon, true)
+				BGFrame.Visible = not BGFrame.Visible
+			end
+			task.wait(0.7)
+			UserOpenned = false
 		end
 	end)
 	AddJipaTaUI(Instance.new("UIAspectRatioConstraint"), DragIcon)
@@ -421,7 +425,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 	SelectFrameMain.BackgroundTransparency = 1
 	
 	function Modes:Tab(options)		
-		wait()
+		task.wait()
 		
 		local MainFrame = Instance.new("Frame", Mode_ScrollingFrame)
 		MainFrame.Size = UDim2.new(1, 0,0.08, 0)	
@@ -511,7 +515,6 @@ function SomtankUI:CreateWindow(Setting_Input)
 		Function_ScrollingFrame.ChildRemoved:Connect(function()
 			updateCanvasSize(Function_ScrollingFrame, 0.02)
 		end)
-		
 		Button.Activated:Connect(function()
 			if _G.ModesOnoff then
 				_G.ModesOnoff[MainFrame.Name] = not _G.ModesOnoff[MainFrame.Name]
@@ -615,46 +618,23 @@ function SomtankUI:CreateWindow(Setting_Input)
 				_G.ModesNeedOn[MainFrame.Name] = false
 			end
 			task.spawn(function()
-				if _G.ModesNext then
-					_G.ModesNext[MainFrame.Name] = true
-					for i=1,5 do
-						if _G.ModesNext[MainFrame.Name] then
-							wait(0.1)
-						end
-					end
-					if _G.ModesNext[MainFrame.Name] then
-						TweenFrame(UIStroke_Title, {Thickness = 0}
-						, 0.7, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)	
-						TweenFrame(Title, {Size = UDim2.new(0, 0,0, 45)}
-						, 0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)					
-						TweenModeFrame = TweenFrame(BGFrame_, {Size = UDim2.new(0.301, 0,1, 0)}
-						, 0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
-						TweenModeFrame.Completed:Connect(function()
-							Title.Text = ""
-							TweenFrame(BGFrame_UICorner, {CornerRadius = UDim.new(0.3, 0)}
-							, 0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
-						end)						
-						TweenFrame(UIStroke_Title, {Thickness = 0}
-						, 0.7, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)	
-						TweenFrame(IconBG, {BackgroundTransparency = 0.6}
-						, 0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)	
-						TweenFrame(IconBG_UICorner, {CornerRadius = UDim.new(1, 0)}
-						, 0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
-						if _G.ModesOnoff[MainFrame.Name] then	
-							TweenFrame(Title, {Size = UDim2.new(0, 0,0, 45)}
-							, 0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)			
-							TweenModeFrame = TweenFrame(BGFrame_, {Size = UDim2.new(0.301, 0,1, 0)}
-							, 0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
-							TweenModeFrame.Completed:Connect(function()
-								Title.Text = ""
-								TweenFrame(BGFrame_UICorner, {CornerRadius = UDim.new(0.3, 0)}
-								, 0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
-							end)
-							_G.ModesOnoff[MainFrame.Name] = false
-						end
-						_G.ModesNext[MainFrame.Name] = false
-					end
-				end
+				TweenFrame(UIStroke_Title, {Thickness = 0}
+				, 0.7, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)	
+				TweenFrame(Title, {Size = UDim2.new(0, 0,0, 45)}
+				, 0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)					
+				TweenModeFrame = TweenFrame(BGFrame_, {Size = UDim2.new(0.301, 0,1, 0)}
+				, 0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
+				TweenModeFrame.Completed:Connect(function()
+					Title.Text = ""
+					TweenFrame(BGFrame_UICorner, {CornerRadius = UDim.new(0.3, 0)}
+					, 0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
+				end)						
+				TweenFrame(UIStroke_Title, {Thickness = 0}
+				, 0.7, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)	
+				TweenFrame(IconBG, {BackgroundTransparency = 0.6}
+				, 0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)	
+				TweenFrame(IconBG_UICorner, {CornerRadius = UDim.new(1, 0)}
+				, 0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
 			end)
 		end)
 		
@@ -664,7 +644,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 		Functions.Gui = Function_ScrollingFrame
 
 		function Functions:MiniTab(options)
-			wait()
+			task.wait()
 			
 			local BGFuncFrame = Instance.new("Frame", Function_ScrollingFrame)
 			BGFuncFrame.Size = UDim2.new(0, 191,0, 210)
@@ -703,7 +683,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 			MiniFunction.Gui = Function_ScrollingFrame
 
 			function MiniFunction:Click(options)
-				wait()
+				task.wait()
 				
 				local Click_options, NameFunction = {}, options and options.Title
 				Click_options.Callback = options.Callback
@@ -759,7 +739,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 			end
 			
 			function MiniFunction:Input(options)
-				wait()
+				task.wait()
 				
 				local Input_options, NameFunction = {}, options and options.Title or "ห๊ะ"
 				Input_options.Callback = options.Callback
@@ -817,7 +797,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 			_G.ToggleButtonSomtank = {}
 			
 			function MiniFunction:Toggle(options)
-				wait()
+				task.wait()
 				
 				local Toggle_options, NameFunction, StageText = {}, options and options.Title or "ห๊ะ", nil
 				Toggle_options.Callback = options.Callback
@@ -952,7 +932,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 			end
 			
 			function MiniFunction:Slider(options)
-				wait()
+				task.wait()
 				
 				local Slider_options, NameFunction = {}, options and options.Title or "ห๊ะ"
 				Slider_options.Callback = options.Callback
@@ -1124,7 +1104,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 			end
 			
 			function MiniFunction:SliderEnum(options)
-				wait()
+				task.wait()
 
 				local Slider_options, NameFunction = {}, options and options.Title or "EnumSlider"
 				Slider_options.Callback = options.Callback
@@ -1244,7 +1224,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 			_G.NowThisFrameIsOpenDropdown = nil
 									
 			function MiniFunction:Dropdown(options)
-				wait()
+				task.wait()
 				
 				local Dropdown_options, NameFunction = {}, options and options.Title
 				Dropdown_options.Callback = options.Callback
@@ -1526,7 +1506,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 			end
 			
 			function MiniFunction:Frame3DShow(options)
-				wait()
+				task.wait()
 
 				local Frame3DShow_options, NameFunction = {}, options and options.Title
 				Frame3DShow_options.ItemShow = options.ItemShow
@@ -1679,6 +1659,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 			LineGraph_options.Callback = options.Callback
 			LineGraph_options.Values = options.Values
 			LineGraph_options.Description = options.Description
+			LineGraph_options.Values_date = options.Values_date or nil
 			
 			local BGFuncFrame = Instance.new("Frame", Function_ScrollingFrame)
 			BGFuncFrame.Size = UDim2.new(0, 388,0, 222)
@@ -1802,7 +1783,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 					label.Position = UDim2.new(0, x, 1, -7)
 					label.Size = UDim2.new(0, 50, 0, 20)
 					label.BackgroundTransparency = 1
-					label.Text = tostring(value)
+					label.Text = LineGraph_options.Values_date[i] or tostring(value)
 					label.TextColor3 = NowTheame.TextColor2
 					label.TextTransparency = 1
 					label.Font = Enum.Font.SourceSansBold
@@ -1855,7 +1836,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 					label.Text = string.format("%.1f", valueAtLine)
 					label.Font = Enum.Font.SourceSansBold
 					label.TextSize = 16
-					label.TextColor3 = NowTheame.TextColor2
+					label.TextColor3 = Color3.fromRGB(255, 185, 7)--NowTheame.TextColor2
 					label.AnchorPoint = Vector2.new(0, 0.5)
 					label.Position = UDim2.new(0.97, 0, lineY, 0)
 					label.TextTransparency = 1
@@ -1900,6 +1881,7 @@ function SomtankUI:CreateWindow(Setting_Input)
 				if Input_Value and Input_Value.Values then
 					RemoveAllGraph()
 					LineGraph_options.Values = Input_Value.Values
+					LineGraph_options.Values_date = Input_Value.Values_date or nil
 					DrawHorizontalGridLines(GraphFrame, LineGraph_options.Values, Color3.fromRGB(89, 44, 177), 2)			
 					drawGraph(LineGraph_options.Values)
 				end	
@@ -1916,3 +1898,4 @@ function SomtankUI:CreateWindow(Setting_Input)
 end
 
 return SomtankUI
+
