@@ -53,42 +53,41 @@ local Library = {
 --// Constants & Theming
 local Themes = {
     Default = {
-		BackgroundImage = "rbxassetid://127073445525528",
-		DragIconImage = "rbxassetid://84408196679900",
-		BackgroundColor = Color3.new(0.596078, 0.243137, 1),
-		ColorSequence = ColorSequence.new{
-			ColorSequenceKeypoint.new(0, Color3.fromRGB(154, 0, 247)),
-			ColorSequenceKeypoint.new(0.46, Color3.fromRGB(154, 0, 247)),
-			ColorSequenceKeypoint.new(0.85, Color3.fromRGB(163, 103, 247)),
-			ColorSequenceKeypoint.new(1, Color3.fromRGB(213, 153, 247))},
-		TextColor1 = Color3.new(0.564706, 0.180392, 1),
-		TextColor2 = Color3.new(0.752941, 0.47451, 1),
-		UIStroke1 = Color3.new(0.054902, 0.0235294, 0.101961),
-		UIStroke2 = Color3.new(0.588235, 0.4, 0.85098),
-		
-		BackgroundColor1 = Color3.new(0.196078, 0.113725, 0.309804),
-		BackgroundColor2 = Color3.new(0.584314, 0.290196, 0.945098),
-		
-	},
-	Holloween = {
-		BackgroundImage = "rbxassetid://121558710773414",
-		DragIconImage = "rbxassetid://130714476462777",
-		BackgroundColor = Color3.new(0.52549, 0.321569, 0.0901961),
-		ColorSequence = ColorSequence.new{
-			ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 161, 0)),
-			ColorSequenceKeypoint.new(0.46, Color3.fromRGB(255, 161, 0)),
-			ColorSequenceKeypoint.new(0.85, Color3.fromRGB(247, 179, 43)),
-			ColorSequenceKeypoint.new(1, Color3.fromRGB(247, 239, 131))},
-		TextColor1 = Color3.new(1, 0.54902, 0),
-		TextColor2 = Color3.new(1, 0.827451, 0.133333),
-		UIStroke1 = Color3.new(0.101961, 0.0509804, 0),
-		UIStroke2 = Color3.new(0.85098, 0.286275, 0.0627451),
-		
-		
-		BackgroundColor1 = Color3.new(0.309804, 0.188235, 0.054902),
-		BackgroundColor2 = Color3.new(0.945098, 0.631373, 0.27451),
-		
-	},
+        BackgroundImage = "rbxassetid://127073445525528",
+        DragIconImage = "rbxassetid://84408196679900",
+        BackgroundColor = Color3.fromRGB(152, 62, 255),
+        ColorSequence = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, Color3.fromRGB(154, 0, 247)),
+            ColorSequenceKeypoint.new(0.46, Color3.fromRGB(154, 0, 247)),
+            ColorSequenceKeypoint.new(0.85, Color3.fromRGB(163, 103, 247)),
+            ColorSequenceKeypoint.new(1, Color3.fromRGB(213, 153, 247))
+        },
+        TextColor1 = Color3.fromRGB(144, 46, 255),
+        TextColor2 = Color3.fromRGB(192, 121, 255),
+        UIStroke1 = Color3.fromRGB(14, 6, 26),
+        UIStroke2 = Color3.fromRGB(150, 102, 217),
+        BackgroundColor1 = Color3.fromRGB(50, 29, 79),
+        BackgroundColor2 = Color3.fromRGB(149, 74, 241),
+        Accent = Color3.fromRGB(172, 131, 255),
+    },
+    Halloween = { -- Fixed spelling
+        BackgroundImage = "rbxassetid://121558710773414",
+        DragIconImage = "rbxassetid://130714476462777",
+        BackgroundColor = Color3.fromRGB(134, 82, 23),
+        ColorSequence = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 161, 0)),
+            ColorSequenceKeypoint.new(0.46, Color3.fromRGB(255, 161, 0)),
+            ColorSequenceKeypoint.new(0.85, Color3.fromRGB(247, 179, 43)),
+            ColorSequenceKeypoint.new(1, Color3.fromRGB(247, 239, 131))
+        },
+        TextColor1 = Color3.fromRGB(255, 140, 0),
+        TextColor2 = Color3.fromRGB(255, 211, 34),
+        UIStroke1 = Color3.fromRGB(26, 13, 0),
+        UIStroke2 = Color3.fromRGB(217, 73, 16),
+        BackgroundColor1 = Color3.fromRGB(79, 48, 14),
+        BackgroundColor2 = Color3.fromRGB(241, 161, 70),
+        Accent = Color3.fromRGB(255, 180, 50),
+    },
 }
 
 local CurrentTheme = Themes.Default
