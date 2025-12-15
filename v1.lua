@@ -151,7 +151,7 @@ local function AddDecoration(instance, type, p1, p2, p3)
     end
     return item
 end
-
+print("Debug Check:", CurrentTheme, CurrentTheme and CurrentTheme.TextColor2)
 local function MakeDraggable(dragHandle, moveTarget)
     if not dragHandle or not moveTarget then return end
     
