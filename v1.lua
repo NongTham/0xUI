@@ -151,7 +151,7 @@ local function AddDecoration(instance, type, p1, p2, p3)
     end
     return item
 end
-print("Debug Check:", CurrentTheme, CurrentTheme and CurrentTheme.TextColor2)
+
 local function MakeDraggable(dragHandle, moveTarget)
     if not dragHandle or not moveTarget then return end
     
@@ -415,7 +415,7 @@ function SomtankUI:CreateWindow(Settings)
         TabText.Position = UDim2.new(0.35, 0, 0, 0)
         TabText.BackgroundTransparency = 1
         TabText.Font = Enum.Font.FredokaOne
-        TabText.TextColor3 = CurrentTheme.TextColor2
+        TabText.TextColor3 = CurrentTheme.TextColor2 or Color3.new(1, 1, 1)
         TabText.TextSize = 20
         TabText.TextTransparency = 1
         TabText.TextXAlignment = Enum.TextXAlignment.Left
@@ -499,7 +499,7 @@ function SomtankUI:CreateWindow(Settings)
             SectionLabel.BackgroundTransparency = 1
             SectionLabel.Text = SectionTitle
             SectionLabel.Font = Enum.Font.FredokaOne
-            SectionLabel.TextColor3 = CurrentTheme.TextColor2
+            SectionLabel.TextColor3 = CurrentTheme.TextColor2 or Color3.new(1, 1, 1)
             SectionLabel.TextSize = 22
             AddDecoration(SectionLabel, "Stroke", CurrentTheme.UIStroke1, 2)
 
@@ -538,7 +538,7 @@ function SomtankUI:CreateWindow(Settings)
                 label.BackgroundTransparency = 1
                 label.Text = btnName
                 label.Font = Enum.Font.FredokaOne
-                label.TextColor3 = CurrentTheme.TextColor2
+                label.TextColor3 = CurrentTheme.TextColor2 or Color3.new(1, 1, 1)
                 label.TextSize = 16
                 label.TextXAlignment = Enum.TextXAlignment.Left
                 AddDecoration(label, "Stroke", CurrentTheme.UIStroke1, 2)
@@ -576,7 +576,7 @@ function SomtankUI:CreateWindow(Settings)
                 label.BackgroundTransparency = 1
                 label.Text = togName
                 label.Font = Enum.Font.FredokaOne
-                label.TextColor3 = CurrentTheme.TextColor2
+                label.TextColor3 = CurrentTheme.TextColor2 or Color3.new(1, 1, 1)
                 label.TextSize = 16
                 label.TextXAlignment = Enum.TextXAlignment.Left
                 AddDecoration(label, "Stroke", CurrentTheme.UIStroke1, 2)
@@ -590,7 +590,7 @@ function SomtankUI:CreateWindow(Settings)
                 local toggleDot = Instance.new("Frame", toggleBg)
                 toggleDot.Size = UDim2.fromOffset(16, 16)
                 toggleDot.Position = UDim2.new(0, 2, 0.5, -8)
-                toggleDot.BackgroundColor3 = CurrentTheme.TextColor2
+                toggleDot.BackgroundColor3 = CurrentTheme.TextColor2 or Color3.new(1, 1, 1)
                 AddDecoration(toggleDot, "Corner", 1, 0)
                 
                 local trigger = Instance.new("TextButton", frame)
@@ -612,11 +612,11 @@ function SomtankUI:CreateWindow(Settings)
                         end
                     else
                         if animated then
-                            Tween(toggleDot, {Position = UDim2.new(0, 2, 0.5, -8), BackgroundColor3 = CurrentTheme.TextColor2}, 0.2)
+                            Tween(toggleDot, {Position = UDim2.new(0, 2, 0.5, -8), BackgroundColor3 = CurrentTheme.TextColor2 or Color3.new(1, 1, 1)}, 0.2)
                             Tween(toggleBg, {BackgroundColor3 = CurrentTheme.BackgroundColor1}, 0.2)
                         else
                             toggleDot.Position = UDim2.new(0, 2, 0.5, -8)
-                            toggleDot.BackgroundColor3 = CurrentTheme.TextColor2
+                            toggleDot.BackgroundColor3 = CurrentTheme.TextColor2 or Color3.new(1, 1, 1)
                             toggleBg.BackgroundColor3 = CurrentTheme.BackgroundColor1
                         end
                     end
@@ -645,7 +645,7 @@ function SomtankUI:CreateWindow(Settings)
                 label.BackgroundTransparency = 1
                 label.Text = sName
                 label.Font = Enum.Font.FredokaOne
-                label.TextColor3 = CurrentTheme.TextColor2
+                label.TextColor3 = CurrentTheme.TextColor2 or Color3.new(1, 1, 1)
                 label.TextSize = 16
                 label.TextXAlignment = Enum.TextXAlignment.Left
                 AddDecoration(label, "Stroke", CurrentTheme.UIStroke1, 2)
@@ -731,7 +731,7 @@ function SomtankUI:CreateWindow(Settings)
                 label.BackgroundTransparency = 1
                 label.Text = dName
                 label.Font = Enum.Font.FredokaOne
-                label.TextColor3 = CurrentTheme.TextColor2
+                label.TextColor3 = CurrentTheme.TextColor2 or Color3.new(1, 1, 1)
                 label.TextSize = 16
                 label.TextXAlignment = Enum.TextXAlignment.Left
                 AddDecoration(label, "Stroke", CurrentTheme.UIStroke1, 2)
